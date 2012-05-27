@@ -1,19 +1,26 @@
 # An example Backbone application contributed by
-# [Jérôme Gravel-Niquet](http://jgn.me/). This demo uses a simple
-# [LocalStorage adapter](backbone-localstorage.html)
-# to persist Backbone models within your browser.
+# [Jérôme Gravel-Niquet](http://jgn.me/). This demo uses
+# [Parse.com](http://parse.com)
+# to persist Backbone models.
 # 
 # This [CoffeeScript](http://jashkenas.github.com/coffee-script/) variation has been provided by [Jason Giedymin](http://jasongiedymin.com/).
+#
+# This [Parse.com](http://parse.com) variation has been provided by [Eric Butler](http://codebutler.com).
 #
 # Note: two things you will notice with my CoffeeScript are that I prefer to
 # use four space indents and prefer to use `()` for all functions.
 
 # Load the application once the DOM is ready, using a `jQuery.ready` shortcut.
 $ ->    
+    # Set the Parse.com Application ID and REST API Key.
+    Parse.initialize '119dtKTmJcjp63zNta9eEtvJKMFoYOpIWUgneZnr', 'HndLjTy1LOBD0iVNMpMh2YTYUIYeEWXBfGjnQ7En'
+
     ### Todo Model ###
 
     # Our basic **Todo** model has `content`, `order`, and `done` attributes.
-    class Todo extends Backbone.Model
+    class Todo extends ParseObject
+        parseClassName: 'Todo'
+
         # Default attributes for the todo.
         defaults:
             content: "empty todo..."
@@ -28,22 +35,18 @@ $ ->
         toggle: ->
             @save({ done: !@get("done") })
 
-        # Remove this Todo from *localStorage* and delete its view.
+        # Remove this Todo from the Parse.com database and delete its view.
         clear: ->
             @destroy()
             @view.remove()
 
     ### Todo Collection ###
 
-    # The collection of todos is backed by *localStorage* instead of a remote
-    # server.
-    class TodoList extends Backbone.Collection
+    # The collection of todos is backed by a Parse.com application.
+    class TodoList extends ParseCollection
 
         # Reference to this collection's model.
         model: Todo
-
-        # Save all of the todo items under the `"todos"` namespace.
-        localStorage: new Store("todos")
 
         # Attribute getter/setter
         getDone = (todo) ->
@@ -153,7 +156,7 @@ $ ->
 
         # At initialization we bind to the relevant events on the `Todos`
         # collection, when items are added or changed. Kick things off by
-        # loading any preexisting todos that might be saved in *localStorage*.
+        # loading any preexisting todos that might be saved at Parse.com.
         initialize: =>
             @input = this.$("#new-todo")
 
@@ -191,7 +194,7 @@ $ ->
             }
 
         # If you hit return in the main input field, create new **Todo** model,
-        # persisting it to *localStorage*.
+        # persisting it to Parse.com.
         createOnEnter: (e) ->
             return if (e.keyCode != 13)
             Todos.create( @newAttributes() )

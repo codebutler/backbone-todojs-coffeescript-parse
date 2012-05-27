@@ -4,15 +4,21 @@
   <head>
     <title>Backbone Demo: Todos in CoffeeScript</title>
     <link href="todos.css" media="all" rel="stylesheet" type="text/css"/>
+
+    <script type="text/coffeescript" src="backbone-parse.coffee"></script>
+    <script type="text/coffeescript" src="todos.coffee"></script>
+
     <script src="lib/json2.js"></script>
     <script src="lib/jquery-1.5.js"></script>
     <script src="lib/underscore-1.1.6.js"></script>
     <script src="lib/backbone.js"></script>
     <script src="lib/backbone-localstorage.js"></script>
-    <script src="todos.js"></script>
+    <script src="lib/coffee-script.js"></script>
   </head>
 
   <body>
+
+    <a href="https://github.com/codebutler/backbone-todojs-coffeescript-parse"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 
     <!-- Todo App Interface -->
 
@@ -20,7 +26,7 @@
 
       <div class="title">
         <h1>Todos</h1>
-        <h3>in CoffeeScript</h3>
+        <h3>in CoffeeScript using Parse.com</h3>
       </div>
 
       <div class="content">
@@ -43,11 +49,16 @@
     <h3>Instructions:</h3>
     <ul id="instructions">
       <li>Double-click to edit a todo.</li>
-      <li><a href="docs/coffeescript/todos.html">View the annotated CoffeeScript source.</a></li>
-      <li><a href="http://github.com/JasonGiedymin/backbone-todojs-coffeescript">View the GitHub repository.</a></li>
-      <li><a href="js-ver/index.html">Play with the original app.</a></li>
-      <li><a href="docs/js/todos.html">View the original annotated source</a></li>
+      <li><a href="docs/todos.html">View the annotated CoffeeScript source.</a></li>
+      <li><a href="https://github.com/codebutler/backbone-todojs-coffeescript-parse">View the GitHub repository.</a></li>
+      <li><a href="http://documentcloud.github.com/backbone/examples/todos/index.html">Visit the original app.</a></li>
     </ul>
+
+    <div id="credits">
+      Parse integration done by
+      <br/>
+      <a href="http://codebutler.com">Eric Butler</a>
+    </div>
 
     <div id="credits">
       CoffeeScript version done by
@@ -108,8 +119,6 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
   </script>
-
-  <a href="http://github.com/JasonGiedymin/backbone-todojs-coffeescript"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://gs1.wac.edgecastcdn.net/80460E/assets/img/abad93f42020b733148435e2cd92ce15c542d320/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub"></a>
 
   </body>
 </html>
